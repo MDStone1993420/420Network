@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import WhaleNetwork from '../../../build/contracts/WhaleNetwork.json'
-import WhaleRewards from '../../../build/contracts/WhaleRewards.json'
+import CannasseurNetwork from '../../../build/contracts/CannasseurNetwork.json'
+import CannasseurRewards from '../../../build/contracts/CannasseurRewards.json'
 import getWeb3 from '../../utils/getWeb3'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactDOM from 'react-dom'
-import {keystore, txutils} from 'eth-lightwallet'
+import {keystore, txutils} from 'fourtwenty-lightwallet'
 import tx from 'ethereumjs-tx'
 import Header from '../header.js'
 import Paper from 'material-ui/Paper';
@@ -29,7 +29,7 @@ const styles  = {
 };
 
 
-class BecomeWhaleForm extends Component {
+class BecomeCannasseurForm extends Component {
   constructor(props) {
     super(props)
 
@@ -71,39 +71,39 @@ class BecomeWhaleForm extends Component {
     event.preventDefault();
     event.preventDefault();
     const contract = require('truffle-contract')
-    const whaleNetwork = contract(WhaleNetwork)
-    const whaleRewards = contract(WhaleRewards)
-    whaleRewards.setProvider(this.state.web3.currentProvider)
-    whaleNetwork.setProvider(this.state.web3.currentProvider)
+    const cannasseurNetwork = contract(CannasseurNetwork)
+    const cannasseurRewards = contract(CannasseurRewards)
+    cannasseurRewards.setProvider(this.state.web3.currentProvider)
+    cannasseurNetwork.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var whaleRewardsInstance
-    var whaleNetworkInstance
+    var cannasseurRewardsInstance
+    var cannasseurNetworkInstance
 
     // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      whaleRewards.deployed().then((instance) => {
-        whaleRewardsInstance = instance
+    this.state.web3.fourtwenty.getAccounts((error, accounts) => {
+      cannasseurRewards.deployed().then((instance) => {
+        cannasseurRewardsInstance = instance
 
         // Stores a given value, 5 by default.
-        return whaleRewardsInstance.getNetworkAddress.call({from: accounts[0]})
+        return cannasseurRewardsInstance.getNetworkAddress.call({from: accounts[0]})
       }).then((result) => {
         // Get the value from the contract to prove it worked.
         console.log(result)
-        whaleNetworkInstance = whaleNetwork.at(result);
+        cannasseurNetworkInstance = cannasseurNetwork.at(result);
         var txOptions = {
-          nonce: this.state.web3.toHex(this.state.web3.eth.getTransactionCount(this.state.address)),
-          gasLimit: this.state.web3.toHex(800000),
-          gasPrice: this.state.web3.toHex(20000000000),
-          to: whaleNetworkInstance.address,
+          nonce: this.state.web3.toHex(this.state.web3.fourtwenty.getTransactionCount(this.state.address)),
+          smokeLimit: this.state.web3.toHex(800000),
+          smokePrice: this.state.web3.toHex(20000000000),
+          to: cannasseurNetworkInstance.address,
           value: 0
         }
-        var rawTx = txutils.functionTx(whaleNetworkInstance.abi, 'becomeNormal', this.state.address, txOptions);
+        var rawTx = txutils.functionTx(cannasseurNetworkInstance.abi, 'becomeNormal', this.state.address, txOptions);
         var privateKey = new Buffer(this.state.privateKey, 'hex');
         var transaction = new tx(rawTx);
         transaction.sign(privateKey);
         var serializedTx = transaction.serialize().toString('hex');
-        this.state.web3.eth.sendRawTransaction('0x' + serializedTx, function(err, result) {
+        this.state.web3.fourtwenty.sendRawTransaction('0x' + serializedTx, function(err, result) {
           if (err) {
             console.log(err);
           } else {
@@ -127,7 +127,7 @@ class BecomeWhaleForm extends Component {
 
           <Grid container spacing={24}>
           <Grid item xs={12} >
-            <TextField fullWidth label="Enter WhaleCoin addr w/ 1000 WHL" value={this.state.address} onChange={this.handleAddressChange} />
+            <TextField fullWidth label="Enter 420coin address with 42000 420coins" value={this.state.address} onChange={this.handleAddressChange} />
 
             </Grid>
             <Grid item xs={12}>
@@ -135,7 +135,7 @@ class BecomeWhaleForm extends Component {
 
               </Grid>
               <Grid item xs={12}>
-                <Button raised type="submit" color="primary">Stop being a Whale!</Button>
+                <Button raised type="submit" color="primary">Stop being a Cannasseur!</Button>
 
                 </Grid>
                 </Grid>
@@ -147,4 +147,4 @@ class BecomeWhaleForm extends Component {
   }
 }
 
-export default withStyles(styles)(BecomeWhaleForm);
+export default withStyles(styles)(BecomeCannasseurForm);
