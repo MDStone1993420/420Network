@@ -1,7 +1,7 @@
 pragma solidity ^0.4.11;
 
 
-contract WhaleNetwork {
+contract CannasseurNetwork {
 
   event Posted(
       address author,
@@ -9,9 +9,9 @@ contract WhaleNetwork {
       uint id
   );
 
-  struct Whale {
+  struct Cannasseur {
     uint timestamp;
-    bool isWhale;
+    bool isCannasseur;
     bool validated;
     uint[] postList;
   }
@@ -25,7 +25,7 @@ contract WhaleNetwork {
     uint timestamp;
     uint id;
     address[] followers;
-    address whale;
+    address cannasseur;
     string title;
   }
 
@@ -36,12 +36,12 @@ contract WhaleNetwork {
   uint public numPosts;
   mapping (uint => Post) public posts;
   address owner;
-  mapping (address => Whale) public whales;
-  uint public numWhales;
-  uint whaleRequirement;
-  address[] public whaleList;
+  mapping (address => Cannasseur) public cannasseurs;
+  uint public numCannasseurs;
+  uint cannasseurRequirement;
+  address[] public cannasseurList;
   mapping (address => Validator) validators;
-  mapping (address => address) public whaleMod;
+  mapping (address => address) public cannasseurMod;
 
   //modifiers
 
@@ -50,8 +50,8 @@ contract WhaleNetwork {
     _;
   }
 
-  modifier onlyWhale() {
-      require(whales[msg.sender].isWhale);
+  modifier onlyCannasseur() {
+      require(cannasseurs[msg.sender].isCannasseur);
       _;
   }
 
@@ -60,40 +60,40 @@ contract WhaleNetwork {
       _;
   }
 
-  function WhaleNetwork(address _owner) {
+  function CannasseurNetwork(address _owner) {
     owner = _owner;
-    numWhales = 0;
-    whaleRequirement = 5555;
+    numCannasseurs = 0;
+    cannasseurRequirement = 42000;
     numPosts = 0;
   }
 
 
   //setter functions
 
-  function becomeWhale() payable {
-    require(msg.value == whaleRequirement);
-    require(!whales[msg.sender].isWhale);
-    whales[msg.sender].timestamp = now;
-    whales[msg.sender].isWhale = true;
-    whaleList.push(msg.sender);
-    numWhales++;
+  function becomeCannasseur() payable {
+    require(msg.value == cannasseurRequirement);
+    require(!cannasseurs[msg.sender].isCannasseur);
+    cannasseurs[msg.sender].timestamp = now;
+    cannasseurs[msg.sender].isCannasseur = true;
+    cannasseurList.push(msg.sender);
+    numCannasseurs++;
   }
 
   function becomeNormal() {
-    require(whales[msg.sender].isWhale);
-    msg.sender.transfer(whaleRequirement);
-    whales[msg.sender].timestamp = now;
-    whales[msg.sender].isWhale = false;
-    numWhales--;
+    require(cannasseurs[msg.sender].isCannasseur);
+    msg.sender.transfer(cannasseurRequirement);
+    cannasseurs[msg.sender].timestamp = now;
+    cannasseurs[msg.sender].isCannasseur = false;
+    numCannasseurs--;
   }
 
-  function designateModerator(address mod) onlyWhale{
-      whaleMod[msg.sender] = mod;
+  function designateModerator(address mod) onlyCannasseur{
+      cannasseurMod[msg.sender] = mod;
   }
 
-  function validate(address whale) onlyValidators {
-      require(whales[whale].isWhale); //check if whale
-      whales[whale].validated = true;
+  function validate(address cannasseur) onlyValidators {
+      require(cannasseurs[Cannasseur].isCannasseur); //check if a Cannasseur
+      cannasseurs[Cannasseur].validated = true;
   }
 
   function addValidator(address addr) isOwner{
@@ -102,22 +102,22 @@ contract WhaleNetwork {
       validators[addr].isValidator = true;
   }
 
-  function post(string postTitle, address whale)  {
-    require(whales[whale].isWhale);
-    require(whaleMod[whale] == msg.sender);
+  function post(string postTitle, address cannasseur)  {
+    require(cannasseurs[cannasseur].isCannasseur);
+    require(cannasseurMod[cannasseur] == msg.sender);
     require(bytes(postTitle).length <= 160);
     posts[numPosts].id = numPosts;
     posts[numPosts].timestamp = now;
-    posts[numPosts].whale = whale;
+    posts[numPosts].cannasseur = cannasseur;
     posts[numPosts].title = postTitle;
-    whales[msg.sender].postList.push(numPosts);
+    cannasseurs[msg.sender].postList.push(numPosts);
     Posted(msg.sender, postTitle, numPosts);
     numPosts++;
   }
 
   function addFollowers(uint postid, address[] followers) {
     Vars memory vars;
-    require(whaleMod[posts[postid].whale] == msg.sender);
+    require(cannasseurMod[posts[postid].cannasseur] == msg.sender);
     for (vars.i=0; vars.i<followers.length; vars.i++) {
       posts[postid].followers.push(followers[vars.i]);
   }
@@ -125,8 +125,8 @@ contract WhaleNetwork {
 
 
   //getter functions
-  function isWhale(address _address) constant returns (bool _status) {
-    bool status = whales[_address].isWhale;
+  function isCannasseur(address _address) constant returns (bool _status) {
+    bool status = cannasseurs[_address].isCannasseur;
     return status;
   }
 
@@ -134,15 +134,15 @@ contract WhaleNetwork {
     balance = this.balance;
   }
 
-  function getWhale(address _addr) public constant returns (uint num, address moderator) {
-      return (whales[_addr].postList.length, whaleMod[_addr]);
+  function getCannasseur(address _addr) public constant returns (uint num, address moderator) {
+      return (Cannasseurs[_addr].postList.length, cannasseurMod[_addr]);
   }
 
   function getPost(uint postId) constant returns (uint id, uint timestamp, address whale, uint numFollowers) {
     require(postId < numPosts); //We check that the post exists
     id = posts[postId].id;
     timestamp = posts[postId].timestamp;
-    whale = posts[postId].whale;
+    cannasseur = posts[postId].cannasseur;
     numFollowers = posts[postId].followers.length;
   }
 
