@@ -1,5 +1,5 @@
 {
-  "contract_name": "WhaleNetwork",
+  "contract_name": "CannasseurNetwork",
   "abi": [
     {
       "constant": false,
@@ -34,7 +34,7 @@
       "constant": false,
       "inputs": [
         {
-          "name": "whale",
+          "name": "cannasseur",
           "type": "address"
         }
       ],
@@ -75,7 +75,7 @@
           "type": "uint256"
         },
         {
-          "name": "whale",
+          "name": "cannasseur",
           "type": "address"
         },
         {
@@ -89,10 +89,10 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getNumberWhales",
+      "name": "getNumberCannasseurs",
       "outputs": [
         {
-          "name": "_numWhales",
+          "name": "_numCannasseurs",
           "type": "uint256"
         }
       ],
@@ -150,7 +150,7 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getWhales",
+      "name": "getCannasseurs",
       "outputs": [
         {
           "name": "addr",
@@ -180,7 +180,7 @@
           "type": "address"
         }
       ],
-      "name": "isWhale",
+      "name": "isCannasseur",
       "outputs": [
         {
           "name": "_status",
@@ -241,7 +241,7 @@
     {
       "constant": false,
       "inputs": [],
-      "name": "becomeWhale",
+      "name": "becomeCannasseur",
       "outputs": [],
       "payable": true,
       "type": "function"
