@@ -10,7 +10,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
 import AppBar from 'material-ui/AppBar';
-import WhaleCheckForm from './forms/WhaleCheckForm.js'
+import CannasseurCheckForm from './forms/CannasseurCheckForm.js'
 import ReactDOM from 'react-dom'
 import App from '../App.js'
 
@@ -48,7 +48,7 @@ class Header extends Component {
 
                 <Grid item xs={12} sm={6}>
                 <div className={this.props.classes.root} onClick={this.handleOnClick.bind(this)}>
-                <img style={imgStyle} src="../../images/whalecoin-logo-square.png" alt="logo" />
+                <img style={imgStyle} src="../../images/cannasseur-logo-square.png" alt="logo" />
 
                     <Typography type="title" color="inherit">
                       Whale Network
