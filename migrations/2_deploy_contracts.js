@@ -1,5 +1,5 @@
-var WhaleRewards = artifacts.require("./WhaleRewards.sol");
-var WhaleNetwork = artifacts.require("./WhaleNetwork.sol");
+var CannasseurRewards = artifacts.require("./CannasseurRewards.sol");
+var CannasseurNetwork = artifacts.require("./CannasseurNetwork.sol");
 module.exports = function(deployer) {
-  deployer.deploy(WhaleRewards);
+  deployer.deploy(CannasseurRewards);
 };
