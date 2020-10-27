@@ -1,8 +1,8 @@
 pragma solidity ^0.4.11;
 
-import "./WhaleNetwork.sol";
+import "./CannasseurNetwork.sol";
 
-contract WhaleRewards{
+contract CannasseurRewards{
 
   address public owner;
   mapping (address => uint) public balances;
@@ -19,7 +19,7 @@ contract WhaleRewards{
     uint id;
     uint num;
     uint followers;
-    address whale;
+    address cannasseur;
     address moderator;
     address postFollower;
     uint i;
@@ -32,13 +32,13 @@ contract WhaleRewards{
     uint reward
     );
 
-  WhaleNetwork whaleNetwork;
+  CannasseurNetwork cannasseurNetwork;
   /*uint distEpoch;
   uint distBloc;*/
-  function WhaleRewards() {
+  function CannasseurRewards() {
       owner = msg.sender;
-      whaleNetwork = new WhaleNetwork(owner);
-      networkAddress = address(whaleNetwork);
+      CannasseurNetwork = new CannasseurNetwork(owner);
+      networkAddress = address(cannasseurNetwork);
       lastPostRewarded = 0;
       allocatedRewards = 0;
       claimedRewards = 0;
@@ -64,12 +64,12 @@ contract WhaleRewards{
 
       for (vars.i=lastPostRewarded; vars.i<vars.numberPosts; vars.i++) {
 
-        (vars.id, vars.num, vars.whale, vars.followers) = whaleNetwork.getPost(vars.i);
+        (vars.id, vars.num, vars.cannasseur, vars.followers) = cannasseurNetwork.getPost(vars.i);
         vars.currentFollowerRewards = vars.followerRewards/vars.followers;
-        vars.moderator = whaleNetwork.whaleMod(vars.whale);
+        vars.moderator = cannasseurNetwork.cannasseurMod(vars.cannasseur);
         balances[vars.moderator] += vars.moderatorRewards;
         for (vars.j=0; vars.j<vars.followers;vars.j++) {
-          vars.postFollower = whaleNetwork.getFollower(vars.i, vars.j);
+          vars.postFollower = cannasseurNetwork.getFollower(vars.i, vars.j);
           balances[vars.postFollower] += vars.currentFollowerRewards;
         }
         lastPostRewarded = vars.i;
