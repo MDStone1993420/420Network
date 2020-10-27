@@ -3,13 +3,13 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import React, {Component} from 'react'
-import WhaleNetwork from '../../build/contracts/WhaleNetwork.json'
-import WhaleRewards from '../../build/contracts/WhaleRewards.json'
+import CannasseurNetwork from '../../build/contracts/CannasseurNetwork.json'
+import CannasseurRewards from '../../build/contracts/CannasseurRewards.json'
 import getWeb3 from '../utils/getWeb3'
 import Button from 'material-ui/Button';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactDOM from 'react-dom'
-import BecomeWhaleForm from '../components/forms/BecomeWhaleForm.js'
+import BecomeCannasseurForm from '../components/forms/BecomeCannasseurForm.js'
 import BecomeNormalForm from '../components/forms/BecomeNormalForm.js'
 import Header from '../components/header.js'
 import TextField from 'material-ui/TextField';
@@ -31,7 +31,7 @@ const styles  = {
 };
 
 
-class WhaleAccount extends Component {
+class CannasseurAccount extends Component {
   constructor(props) {
     super(props)
 
@@ -55,7 +55,7 @@ class WhaleAccount extends Component {
     event.preventDefault();
     ReactDOM.render(
       <MuiThemeProvider>
-      <div>{< BecomeWhaleForm />}</div>
+      <div>{< BecomeCannasseurForm />}</div>
     </MuiThemeProvider>, document.getElementById('root'));
   }
   render() {
@@ -68,7 +68,7 @@ class WhaleAccount extends Component {
           <div>
           {< Header />}
 
-          <h1 className={this.props.classes.paper}>My Whale Account</h1>
+          <h1 className={this.props.classes.paper}>My Cannasseur Account</h1>
           <div className={this.props.classes.root}>
 
           <Grid container spacing={24}>
@@ -76,7 +76,7 @@ class WhaleAccount extends Component {
             <Grid item xs={12} sm={6}>
               <Paper className={this.props.classes.paper}>
 
-              {<BecomeWhaleForm/>}
+              {<BecomeCannasseurForm/>}
               </Paper>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -94,4 +94,4 @@ class WhaleAccount extends Component {
 }
 
 
-export default withStyles(styles)(WhaleAccount);
+export default withStyles(styles)(CannasseurAccount);
