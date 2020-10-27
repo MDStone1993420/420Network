@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactDOM from 'react-dom'
 import {keystore, txutils} from 'fourtwenty-lightwallet'
-import tx from 'ethereumjs-tx'
+import tx from 'fourtwentyjs-tx'
 import Header from '../header.js'
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
