@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import WhaleNetwork from '../../../build/contracts/WhaleNetwork.json'
-import WhaleRewards from '../../../build/contracts/WhaleRewards.json'
+import CannasseurNetwork from '../../../build/contracts/CannasseurNetwork.json'
+import CannasseurRewards from '../../../build/contracts/CannasseurRewards.json'
 import getWeb3 from '../../utils/getWeb3'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -83,16 +83,16 @@ class AddFollowers extends Component {
     event.preventDefault();
     event.preventDefault();
     const contract = require('truffle-contract')
-    const whaleNetwork = contract(WhaleNetwork)
-    const whaleRewards = contract(WhaleRewards)
-    whaleRewards.setProvider(this.state.web3.currentProvider)
-    whaleNetwork.setProvider(this.state.web3.currentProvider)
+    const cannasseurNetwork = contract(CannasseurNetwork)
+    const cannasseurRewards = contract(CannasseurRewards)
+    cannasseurRewards.setProvider(this.state.web3.currentProvider)
+    cannasseurNetwork.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var whaleRewardsInstance
-    var whaleNetworkInstance
+    var cannasseurRewardsInstance
+    var cannasseurNetworkInstance
     // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
+    this.state.web3.fourtwenty.getAccounts((error, accounts) => {
       whaleRewards.deployed().then((instance) => {
         whaleRewardsInstance = instance
 
@@ -105,9 +105,9 @@ class AddFollowers extends Component {
             whaleNetworkInstance = netInstance;
 
         var txOptions = {
-          nonce: this.state.web3.toHex(this.state.web3.eth.getTransactionCount(this.state.address)),
-          gasLimit: this.state.web3.toHex(2000000),
-          gasPrice: this.state.web3.toHex(20000000000),
+          nonce: this.state.web3.toHex(this.state.web3.fourtwenty.getTransactionCount(this.state.address)),
+          smokeLimit: this.state.web3.toHex(2000000),
+          smokePrice: this.state.web3.toHex(20000000000),
           to: result,
           from: this.state.address
         }
@@ -123,7 +123,7 @@ class AddFollowers extends Component {
         console.log(3)
         var serializedTx = transaction.serialize().toString('hex');
         console.log(serializedTx)
-        this.state.web3.eth.sendRawTransaction('0x' + serializedTx, function(err, result) {
+        this.state.web3.fourtwenty.sendRawTransaction('0x' + serializedTx, function(err, result) {
           if (err) {
             console.log(err);
           } else {
@@ -150,7 +150,7 @@ class AddFollowers extends Component {
 
           <Grid container spacing={24}>
           <Grid item xs={12} >
-            <TextField fullWidth label="Enter WhaleCoin addr w/ 1000 WHL" value={this.state.address} onChange={this.handleAddressChange} />
+            <TextField fullWidth label="Enter 420Coin address which contains 42000 420coins" value={this.state.address} onChange={this.handleAddressChange} />
 
             </Grid>
             <Grid item xs={12}>
