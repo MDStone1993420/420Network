@@ -1,5 +1,5 @@
 {
-  "contract_name": "WhaleRewards",
+  "contract_name": "CannasseurRewards",
   "abi": [
     {
       "constant": true,
