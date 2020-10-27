@@ -3,14 +3,14 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import React, {Component} from 'react'
-import WhaleNetwork from '../../build/contracts/WhaleNetwork.json'
-import WhaleRewards from '../../build/contracts/WhaleRewards.json'
+import CannasseurNetwork from '../../build/contracts/CannasseurNetwork.json'
+import CannasseurRewards from '../../build/contracts/CannasseurRewards.json'
 import getWeb3 from '../utils/getWeb3'
 import Button from 'material-ui/Button';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactDOM from 'react-dom'
-import BecomeWhaleForm from '../components/forms/BecomeWhaleForm.js'
-import WhaleAccount from '../components/WhaleAccount.js'
+import BecomeCannasseurForm from '../components/forms/BecomeCannasseurForm.js'
+import CannasseurAccount from '../components/CannasseurAccount.js'
 import ModeratorAccount from '../components/ModeratorAccount.js'
 import PostAction from '../components/postAction.js'
 import AddFollowers from '../components/followerAction.js'
@@ -57,7 +57,7 @@ class ActionGrid extends Component {
     event.preventDefault();
     ReactDOM.render(
       <MuiThemeProvider>
-      <div>{< WhaleAccount />}</div>
+      <div>{< CannasseurAccount />}</div>
     </MuiThemeProvider>, document.getElementById('root'));
   }
   handleSubmitMod(event) {
@@ -105,9 +105,9 @@ class ActionGrid extends Component {
 
             <Grid item xs={6} sm={3}>
               <Paper className={this.props.classes.paper}>
-              <h1>My Whale Account</h1>
+              <h1>My Cannasseur Account</h1>
               <br></br>
-              <p>Become a Whale/Stop Being a Whale</p>
+              <p>Become a Cannasseur/Stop Being a Whale</p>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                   <Button raised type="submit" color="primary">Go</Button>
                 </form>
