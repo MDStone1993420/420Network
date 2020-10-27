@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
-import WhaleNetwork from '../../../build/contracts/WhaleNetwork.json'
-import WhaleRewards from '../../../build/contracts/WhaleRewards.json'
+import CannasseurNetwork from '../../../build/contracts/CannasseurNetwork.json'
+import CannasseurRewards from '../../../build/contracts/CannasseurRewards.json'
 import getWeb3 from '../../utils/getWeb3'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactDOM from 'react-dom'
-import {keystore, txutils} from 'eth-lightwallet'
-import tx from 'ethereumjs-tx'
+import {keystore, txutils} from 'fourtwenty-lightwallet'
+import tx from 'fourtwentyjs-tx'
 import Header from '../header.js'
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
@@ -65,26 +65,26 @@ class RewardCheck extends Component {
     event.preventDefault();
     event.preventDefault();
     const contract = require('truffle-contract')
-    const whaleNetwork = contract(WhaleNetwork)
-    const whaleRewards = contract(WhaleRewards)
-    whaleRewards.setProvider(this.state.web3.currentProvider)
-    whaleNetwork.setProvider(this.state.web3.currentProvider)
+    const cannasseurNetwork = contract(CannasseurNetwork)
+    const cannasseurRewards = contract(CannasseurRewards)
+    cannasseurRewards.setProvider(this.state.web3.currentProvider)
+    cannasseurNetwork.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var whaleRewardsInstance
-    var whaleNetworkInstance
+    var cannasseurRewardsInstance
+    var cannasseurNetworkInstance
 
     // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      whaleRewards.deployed().then((instance) => {
-        whaleRewardsInstance = instance
+    this.state.web3.fourtwenty.getAccounts((error, accounts) => {
+      cannasseurRewards.deployed().then((instance) => {
+        cannasseurRewardsInstance = instance
 
         // Stores a given value, 5 by default.
-        return whaleRewardsInstance.balances(this.state.address);
+        return cannasseurRewardsInstance.balances(this.state.address);
       }).then((result) => {
         // Get the value from the contract to prove it worked.
         console.log(result)
-              var resWhl = result.toNumber()/1000000000000000000;
+              var res420 = result.toNumber()/1000000000000000000;
               ReactDOM.render(
               <div>{<Alert result={resWhl}/>}</div>, document.getElementById('result'));
             })
